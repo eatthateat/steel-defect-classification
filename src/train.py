@@ -1,13 +1,24 @@
 import torch
 from torch import nn
-from utils import get_device, load_config
-from models.build import build_model
+from src.utils import get_device, load_config
+from src.models.build import build_model
 import numpy as np
-from evaluate import evaluate
+from src.evaluate import evaluate
 from torch.utils.data import DataLoader
-from data.dataset import NEUDataset as dataset
+from src.data.dataset import NEUDataset as dataset
 from pathlib import Path
-from data.transforms import train_transform, eval_transform
+from src.data.transforms import train_transform, eval_transform
+import argparse
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/baseline.yaml"),
+    )
+    return parser.parse_args()
 
 
 def train(dataloader, model, loss_fn, optimizer, device):
@@ -39,19 +50,22 @@ def train(dataloader, model, loss_fn, optimizer, device):
     return accuracy, train_loss
 
 
-if __name__ == "__main__":
-    cfg = load_config()
+def main():
+    args = parse_args()
+    cfg = load_config(args.config)
     device = get_device()
 
     model = build_model(device=device)
     loss_fn = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam([
         {"params" : model.layer4.parameters(), "lr" : 1e-4},
-        {"params" : model.fc.parameters(), "lr" : 1e-3},
+        {"params" : model.fc.parameters(), "lr" : float(cfg['train']['lr'])},
     ])
     dataset_root = Path(cfg['dataset']['root'])
-    train_dataloader = DataLoader(dataset(root_dir=Path(dataset_root / "train"), transform=train_transform))
-    eval_dataloader = DataLoader(dataset(root_dir=Path(dataset_root / "validation"), transform=train_transform))
+    batch_size = cfg['train']['batch_size']
+    shuffle = cfg['train']['shuffle']
+    train_dataloader = DataLoader(dataset(root_dir=Path(dataset_root / "train"), transform=train_transform), batch_size=batch_size, shuffle=shuffle)
+    eval_dataloader = DataLoader(dataset(root_dir=Path(dataset_root / "validation"), transform=eval_transform), batch_size=batch_size, shuffle=shuffle)
 
     num_epochs = cfg['train']['epochs']
 
@@ -64,4 +78,8 @@ if __name__ == "__main__":
         prep_train_scores[t] = train(train_dataloader, model, loss_fn, optimizer, device)
         prep_test_scores[t] = evaluate(eval_dataloader, model, loss_fn, device)
     print("Done!")
+
+
+if __name__ == "__main__":
+    main()
 
