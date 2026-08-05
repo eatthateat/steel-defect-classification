@@ -1,0 +1,6 @@
+train:
+  lr: 1e-3
+  batch_size: 16
+  epochs: 1
+dataset:
+  root: C:\Users\David\Documents\Projects\yolo-neu\data\raw\NEU-DET
