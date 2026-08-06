@@ -4,4 +4,4 @@ train:
   epochs: 1
   shuffle: True
 dataset:
-  root: data\raw\NEU-DET
+  root: data|raw|NEU-DET
