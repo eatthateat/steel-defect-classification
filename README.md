@@ -10,7 +10,7 @@ The approach used is to take a **ResNet18** pretrained model, fine-tune fourth s
 
 1. Install the requirements.
 ```sh
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 2. Download dataset in a desirable path.
