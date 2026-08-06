@@ -6,6 +6,9 @@ Used **NEU Surface Defect Database** as a [Dataset](https://www.kaggle.com/datas
 
 The approach used is to take a **ResNet18** pretrained model, fine-tune fourth sequential and fully connected one layers for our specific task.
 
+## Metrics (to be fixed)
+Current gathered metrics are not to be displayed due to known and unknown bugs. Currently in process of validation accuracy goes all the way up to 100%, which is not healthy behavior signalizing of some kind of leak. Also theres no test data split now.
+
 ## Quick start
 
 1. Install the requirements.
@@ -27,7 +30,7 @@ curl -L -o ~/Downloads/neu-surface-defect-database.zip\
 python -m src.train
 ```
 
-## Known bugs
+## Known bugs (to be fixed)
 1. transforms.Resize((200, 200)) – The NEU dataset is already 200x200, but ResNet expects 224x224.
 2. class_to_idx silently returns None for unknown classes.
 3. transforms.Normalize is commented out in both transformations.
