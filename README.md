@@ -7,7 +7,7 @@ Used **NEU Surface Defect Database** as a [Dataset](https://www.kaggle.com/datas
 The approach used is to take a **ResNet18** pretrained model, fine-tune fourth sequential and fully connected one layers for our specific task.
 
 ## Metrics (to be fixed)
-Current gathered metrics are not to be displayed due to known and unknown bugs. Currently in process of validation accuracy goes all the way up to 100%, which is not healthy behavior signalizing of some kind of leak. Also theres no test data split now.
+Current gathered metrics are not to be displayed due to known and unknown bugs. Currently in process of validation accuracy reaches 100%, which is not healthy behavior and suggests a data leak. Also there's no test data split now.
 
 ## Quick start
 
