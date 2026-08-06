@@ -16,7 +16,7 @@ Current gathered metrics are not to be displayed due to known and unknown bugs. 
 pip install -r requirements.txt
 ```
 
-2. Download dataset in a desirable path. (requires kaggle account authorization)
+2. Download dataset in a desirable path. (requires kaggle account authorization). It is best to download it manually.
 ```sh
 #!/bin/bash
 curl -L -o ~/Downloads/neu-surface-defect-database.zip\
