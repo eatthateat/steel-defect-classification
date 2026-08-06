@@ -1,5 +1,5 @@
 ## Goal
-The goal of the project was to classify six kinds defects of the hot-rolled steel strip viz. rolled-in scale (RS), patches (Pa), crazing (Cr), pitted surface (PS), inclusion (In) and scratches (Sc).
+The goal of the project was to classify six kinds of defects of the hot-rolled steel strip viz. rolled-in scale (RS), patches (Pa), crazing (Cr), pitted surface (PS), inclusion (In) and scratches (Sc).
 
 ## Approach
 Used **NEU Surface Defect Database** as a [Dataset](https://www.kaggle.com/datasets/kaustubhdikshit/neu-surface-defect-database).
@@ -13,16 +13,16 @@ The approach used is to take a **ResNet18** pretrained model, fine-tune fourth s
 pip install -r requirements.txt
 ```
 
-2. Download dataset in a desirable path.
+2. Download dataset in a desirable path. (requires kaggle account authorization)
 ```sh
 #!/bin/bash
 curl -L -o ~/Downloads/neu-surface-defect-database.zip\
   https://www.kaggle.com/api/v1/datasets/download/kaustubhdikshit/neu-surface-defect-database
 ```
 
-1. Cofigure the `config/baseline.yaml` to your liking (especially the dataset path).
+3. Cofigure the `config/baseline.yaml` to your liking (especially the dataset path).
 
-2. Start training loop.
+4. Start training loop.
 ```sh
 python -m src.train
 ```
